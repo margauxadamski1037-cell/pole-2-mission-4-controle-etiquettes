@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Étiquettes Black Friday Darty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&display=swap">
+<style>
+/* Layout : bandeau d'enseigne, consigne + élève, puis rayon à gauche et poste de contrôle à droite ; empilés sur téléphone */
+:root {
+  --bg: #f4f2f1;
+  --surface: #ffffff;
+  --ink: #1b1a1a;
+  --muted: #615b59;
+  --line: #d9d3d1;
+  --red: #e30613;
+  --red-soft: #fde6e7;
+  --black: #111111;
+  --shelf: #8b8582;
+  --wall: #ebe7e5;
+  --ok: #1d7a3a;
+  --ok-soft: #e3f3e8;
+  --todo: #8a6d00;
+  --todo-soft: #fff4cc;
+  --field: #faf8f7;
+  --display: "Archivo Black", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161414; --surface: #211e1e; --ink: #f3efee; --muted: #b3aba8; --line: #3a3534;
+    --red: #ff3b45; --red-soft: #3a1416; --black: #000000; --shelf: #6e6866; --wall: #2b2727;
+    --ok: #4cc472; --ok-soft: #142b1c; --todo: #f0c94a; --todo-soft: #352c0e; --field: #2a2626;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161414; --surface: #211e1e; --ink: #f3efee; --muted: #b3aba8; --line: #3a3534;
+  --red: #ff3b45; --red-soft: #3a1416; --black: #000000; --shelf: #6e6866; --wall: #2b2727;
+  --ok: #4cc472; --ok-soft: #142b1c; --todo: #f0c94a; --todo-soft: #352c0e; --field: #2a2626;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.45; margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 0 40px; }
+
+header.brand { background: var(--black); color: #fff; }
+header.brand .wrap { padding-block: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
+.logo { background: #e30613; color: #fff; font-family: var(--display); font-size: 20px; padding: 6px 12px; letter-spacing: .02em; }
+header.brand h1 { font-family: var(--display); font-weight: 400; font-size: clamp(20px, 3.2vw, 30px); margin: 0; text-wrap: balance; }
+header.brand h1 span { color: #ff3b45; }
+header.brand p { margin: 0; flex-basis: 100%; color: #d6d0ce; font-size: 14px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); padding: 16px 18px; min-width: 0; }
+.card h2 { font-family: var(--display); font-weight: 400; font-size: 17px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .03em; }
+.card h2 .tag { color: var(--red); }
+.top { margin-top: 20px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; }
+.intro p { margin: 0; max-width: 72ch; }
+.intro p + p { margin-top: 6px; color: var(--muted); font-size: 14px; }
+.eleve label { display: block; font-weight: 600; margin-bottom: 6px; }
+.eleve input { width: 100%; font: inherit; padding: 9px 10px; border: 2px solid var(--line); background: var(--field); color: var(--ink); }
+.eleve input:focus-visible { outline: 3px solid var(--red); outline-offset: 1px; }
+.eleve p { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
+
+.main { margin-top: 16px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; align-items: start; }
+.progress { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.progress strong { font-variant-numeric: tabular-nums; }
+
+/* rayon */
+.rayon { background: var(--wall); border: 3px solid var(--shelf); padding: 12px 10px 0; }
+.etagere { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding-bottom: 0; }
+.etagere + .etagere { margin-top: 14px; }
+.planche { height: 10px; background: var(--shelf); margin: 0 -10px 0; }
+.place { display: flex; flex-direction: column; align-items: center; gap: 0; min-width: 0; }
+.produit { height: 86px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding-bottom: 6px; }
+.produit .ico { font-size: 38px; line-height: 1; }
+.produit .pn { font-size: 11px; color: var(--muted); font-weight: 600; line-height: 1.2; margin-top: 4px; }
+.lbl-btn { appearance: none; font: inherit; background: none; border: 0; padding: 4px 0 8px; width: 100%; cursor: pointer; color: inherit; position: relative; }
+.lbl-btn:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+.lbl-btn.on .mini { box-shadow: 0 0 0 3px var(--red); }
+.state { display: inline-block; margin-top: 5px; font-size: 11px; font-weight: 700; padding: 1px 6px; }
+.state.todo { background: var(--todo-soft); color: var(--todo); }
+.state.ok { background: var(--ok-soft); color: var(--ok); }
+.state.fix { background: var(--red-soft); color: var(--red); }
+
+/* étiquette (rendu commun mini / zoom) */
+.etq { background: #fff; color: #111; border: 2px solid #111; text-align: left; font-family: var(--body); width: 100%; }
+.etq .bar { background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 3px 6px; }
+.etq .bar b { font-family: var(--display); font-weight: 400; letter-spacing: .03em; }
+.etq .bar .rem { color: #ff3b45; font-family: var(--display); }
+.etq .des { padding: 4px 6px 2px; font-weight: 700; line-height: 1.2; }
+.etq .ref { padding: 0 6px; color: #555; }
+.etq .prix { display: flex; justify-content: space-between; align-items: flex-end; padding: 4px 6px; gap: 6px; }
+.etq .old { color: #555; line-height: 1.15; }
+.etq .old s { color: #111; }
+.etq .new { color: #e30613; font-family: var(--display); line-height: 1; white-space: nowrap; }
+.etq .eco { padding: 0 6px 3px; color: #333; min-height: 1em; }
+.etq .dates { background: #f1efee; padding: 3px 6px; color: #333; border-top: 1px solid #ddd; min-height: 1.4em; }
+.mini { font-size: 8px; }
+.mini .bar b { font-size: 8px; } .mini .bar .rem { font-size: 10px; }
+.mini .des { font-size: 8.5px; } .mini .new { font-size: 15px; } .mini .dates { font-size: 7px; }
+.zoom { font-size: 14px; max-width: 380px; }
+.zoom .bar b { font-size: 15px; } .zoom .bar .rem { font-size: 22px; }
+.zoom .des { font-size: 16px; } .zoom .new { font-size: 38px; } .zoom .ref, .zoom .old { font-size: 13px; } .zoom .eco, .zoom .dates { font-size: 12px; }
+
+/* poste de contrôle */
+.poste h3 { font-family: var(--display); font-weight: 400; font-size: 20px; margin: 0 0 10px; }
+.empty-poste { color: var(--muted); }
+.verdict { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 6px; }
+.verdict label { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 8px 12px; cursor: pointer; font-weight: 700; }
+.verdict input { accent-color: var(--red); width: 18px; height: 18px; }
+.verdict label:has(input:checked) { border-color: var(--red); background: var(--red-soft); }
+.verdict label:focus-within { outline: 3px solid var(--red); outline-offset: 1px; }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin-top: 12px; }
+.form .full { grid-column: 1 / -1; }
+.form label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
+.form input, .form textarea { width: 100%; font: inherit; padding: 8px 9px; border: 2px solid var(--line); background: var(--field); color: var(--ink); }
+.form textarea { min-height: 58px; resize: vertical; }
+.form input:focus-visible, .form textarea:focus-visible { outline: 3px solid var(--red); outline-offset: 1px; border-color: var(--red); }
+.sub { font-size: 13px; font-weight: 700; margin: 16px 0 6px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.btn { appearance: none; font: inherit; font-weight: 700; padding: 10px 16px; border: 2px solid var(--black); cursor: pointer; }
+.btn.primary { background: #e30613; border-color: #e30613; color: #fff; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.msg { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+.msg.warn { color: var(--red); font-weight: 700; }
+.foot { margin-top: 16px; }
+
+@media (max-width: 900px) { .top, .main { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .etagere { grid-template-columns: repeat(2, 1fr); } .form { grid-template-columns: 1fr; } }
+
+.linkbox { margin-top: 12px; border: 2px solid var(--red); background: var(--red-soft); padding: 12px 14px; }
+.linkbox p { margin: 0 0 8px; font-size: 14px; }
+.linkbox .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.linkbox input { flex: 1 1 240px; min-width: 0; font: inherit; font-size: 13px; padding: 8px 9px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); }
+.linkbox .small { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+
+<header class="brand">
+  <div class="wrap">
+    <div class="logo">DARTY</div>
+    <h1>Contrôler les étiquettes <span>Black Friday</span></h1>
+    <p>Magasin Darty de Pont-à-Mousson · Pôle merchandising et offre · Mission 4</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="top">
+    <div class="card intro">
+      <h2><span class="tag">Votre mission</span> · ronde de contrôle avant l'ouverture</h2>
+      <p>Les étiquettes Black Friday arrivées du siège sont installées sur le rayon. Avant l'ouverture, contrôlez chaque étiquette à l'aide du catalogue (Ressource 11) et des règles d'affichage des prix (Ressource 17). Si une étiquette n'est pas conforme, refaites-la correctement.</p>
+      <p>Cliquez sur une étiquette du rayon pour la contrôler. Quand les 6 étiquettes sont contrôlées, faites une capture d'écran du rayon et complétez la demande de réimpression dans votre document Word.</p>
+    </div>
+    <div class="card eleve">
+      <label for="nom">Prénom et nom de l'élève</label>
+      <input id="nom" type="text" autocomplete="off" placeholder="Ex. : Léa MARTIN">
+      <p>Votre travail est enregistré automatiquement sur cet ordinateur.</p>
+    </div>
+  </section>
+
+  <section class="main">
+    <div class="card">
+      <div class="progress"><h2 style="margin:0">Rayon Black Friday</h2><span><strong id="count">0 / 6</strong> étiquettes contrôlées</span></div>
+      <div class="rayon" id="rayon"></div>
+      <p class="note">Contrôle réalisé par : <strong id="sig">…</strong> · <span id="date"></span></p>
+    </div>
+
+    <div class="card poste" id="poste" aria-live="polite">
+      <h3>Poste de contrôle</h3>
+      <p class="empty-poste">Cliquez sur une étiquette du rayon pour la contrôler.</p>
+    </div>
+  </section>
+
+  <section class="card foot">
+    <div class="actions">
+      <button class="btn primary" id="save">Enregistrer mon travail</button>
+      <button class="btn ghost" id="reset">Tout effacer</button>
+    </div>
+      <div class="linkbox" id="linkbox" hidden>
+        <p><b>Votre lien de sauvegarde est prêt.</b> Copiez-le et collez-le dans votre document Word : il permet de retrouver votre travail sur n'importe quel ordinateur.</p>
+        <div class="row"><input id="link" type="text" readonly aria-label="Lien de sauvegarde"><button class="btn primary" id="copy" type="button">Copier le lien</button></div>
+        <p class="small">À chaque fois que vous modifiez votre travail, cliquez de nouveau sur « Enregistrer mon travail » et remplacez l'ancien lien dans votre Word.</p>
+      </div>
+    <p class="msg" id="msg" aria-live="polite">Pensez à enregistrer votre travail et à coller votre lien de sauvegarde dans votre document Word.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  // Étiquettes telles qu'elles sont installées sur le rayon (envoi du siège)
+  var LABELS = [
+    { k: 1, ico: "📺", ref: "D001", nom: "TV 55\" 4K UHD Smart TV", barre: "600,00", rem: "20", prix: "480,00", eco: "10,00", offre: "Offre valable du 23/11 au 30/11/2026 dans la limite des stocks disponibles" },
+    { k: 2, ico: "🎧", ref: "D002", nom: "Casque Bluetooth à réduction de bruit", barre: "99,00", rem: "25", prix: "60,00", eco: "0,10", offre: "Offre valable du 23/11 au 30/11/2026 dans la limite des stocks disponibles" },
+    { k: 3, ico: "🧹", ref: "D003", nom: "Aspirateur balai sans fil", barre: "300,00", rem: "30", prix: "220,00", eco: "", offre: "Offre valable du 23/11 au 30/11/2026 dans la limite des stocks disponibles" },
+    { k: 4, ico: "🎵", ref: "D005", nom: "Écouteurs sans fil", barre: "150,00", rem: "20", prix: "120,00", eco: "0,05", offre: "Offre valable du 23/11 au 30/11/2025 dans la limite des stocks disponibles" },
+    { k: 5, ico: "📱", ref: "D011", nom: "Tablette 11\" 128 Go", barre: "350,00", rem: "20", prix: "280,00", eco: "0,30", offre: "Offre valable du 23/11 au 30/11/2026 dans la limite des stocks disponibles" },
+    { k: 6, ico: "☕", ref: "D010", nom: "Machine à café expresso broyeur", barre: "200,00", rem: "35", prix: "130,00", eco: "1,00", offre: "" }
+  ];
+  var FIELDS = ["ref", "nom", "barre", "rem", "prix", "eco", "offre"];
+  var APP = "darty-mission4-etiquettes";
+  var KEY = "darty-mission4-etiquettes";
+  var work = {};          // k -> { verdict: "ok" | "ko", corr: {...} }
+  var current = null;
+
+  var rayon = document.getElementById("rayon"), poste = document.getElementById("poste");
+  var nom = document.getElementById("nom"), sig = document.getElementById("sig"), msg = document.getElementById("msg");
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function etq(d, cls) {
+    return '<div class="etq ' + cls + '">' +
+      '<div class="bar"><b>BLACK FRIDAY</b><span class="rem">' + (d.rem ? "−" + esc(d.rem) + " %" : "") + '</span></div>' +
+      '<div class="des">' + esc(d.nom) + '</div>' +
+      '<div class="ref">Réf. ' + esc(d.ref) + '</div>' +
+      '<div class="prix"><span class="old">Prix de référence*<br><s>' + (d.barre ? esc(d.barre) + " €" : "") + '</s></span>' +
+      '<span class="new">' + (d.prix ? esc(d.prix) + " €" : "") + '</span></div>' +
+      '<div class="eco">' + (d.eco ? "dont " + esc(d.eco) + " € d'éco-participation" : "") + '</div>' +
+      '<div class="dates">' + esc(d.offre) + (d.offre ? "<br>" : "") + '*Prix le plus bas des 30 derniers jours</div>' +
+      '</div>';
+  }
+  function shown(l) { var w = work[l.k]; return (w && w.verdict === "ko" && w.corr) ? w.corr : l; }
+  function stateTag(l) {
+    var w = work[l.k];
+    if (!w || !w.verdict) return '<span class="state todo">À contrôler</span>';
+    if (w.verdict === "ok") return '<span class="state ok">Conforme</span>';
+    return '<span class="state fix">Non conforme · refaite</span>';
+  }
+
+  function drawRayon() {
+    var html = "";
+    [LABELS.slice(0, 3), LABELS.slice(3)].forEach(function (row) {
+      html += '<div class="etagere">';
+      row.forEach(function (l) {
+        html += '<div class="place"><div class="produit"><span class="ico" aria-hidden="true">' + l.ico + '</span><span class="pn">Étiquette n° ' + l.k + '</span></div></div>';
+      });
+      html += '</div><div class="planche"></div><div class="etagere">';
+      row.forEach(function (l) {
+        html += '<button type="button" class="lbl-btn' + (current === l.k ? " on" : "") + '" data-k="' + l.k + '" aria-label="Contrôler l\'étiquette n° ' + l.k + '">' +
+          etq(shown(l), "mini") + stateTag(l) + '</button>';
+      });
+      html += '</div>';
+    });
+    rayon.innerHTML = html;
+    rayon.querySelectorAll(".lbl-btn").forEach(function (b) { b.addEventListener("click", function () { open(+b.dataset.k); }); });
+    var n = LABELS.filter(function (l) { return work[l.k] && work[l.k].verdict; }).length;
+    document.getElementById("count").textContent = n + " / 6";
+  }
+
+  function open(k) {
+    current = k;
+    var l = LABELS[k - 1], w = work[k] || {};
+    var c = w.corr || {};
+    poste.innerHTML =
+      '<h3>Étiquette n° ' + k + '</h3>' +
+      '<div class="sub">Étiquette installée sur le rayon</div>' + etq(l, "zoom") +
+      '<div class="verdict" role="radiogroup" aria-label="Verdict">' +
+        '<label><input type="radio" name="v" value="ok"' + (w.verdict === "ok" ? " checked" : "") + '> Conforme</label>' +
+        '<label><input type="radio" name="v" value="ko"' + (w.verdict === "ko" ? " checked" : "") + '> Non conforme</label>' +
+      '</div>' +
+      '<div id="fixzone"' + (w.verdict === "ko" ? "" : " hidden") + '>' +
+        '<div class="sub">Je refais l\'étiquette correctement</div>' +
+        '<p class="note">Modifiez les informations fausses ou ajoutez celles qui manquent. L\'aperçu se met à jour.</p>' +
+        '<div class="form">' +
+          f("ref", "Référence", c.ref, l.ref) + f("rem", "Remise (%)", c.rem, l.rem) +
+          f("nom", "Désignation", c.nom, l.nom, true) +
+          f("barre", "Prix de référence (€)", c.barre, l.barre) + f("prix", "Prix Black Friday (€)", c.prix, l.prix) +
+          f("eco", "Éco-participation (€)", c.eco, l.eco) +
+          '<div class="full"><label for="fx-offre">Dates et mentions de l\'offre</label><textarea id="fx-offre">' + esc(c.offre != null ? c.offre : l.offre) + '</textarea></div>' +
+        '</div>' +
+        '<div class="sub">Aperçu de l\'étiquette corrigée</div><div id="preview"></div>' +
+      '</div>' +
+      '<div class="actions"><button class="btn primary" id="valider">Valider le contrôle de cette étiquette</button></div>';
+    poste.querySelectorAll('input[name="v"]').forEach(function (r) {
+      r.addEventListener("change", function () { document.getElementById("fixzone").hidden = r.value !== "ko" || !r.checked; preview(); });
+    });
+    FIELDS.forEach(function (id) { var el = document.getElementById("fx-" + id); if (el) el.addEventListener("input", preview); });
+    document.getElementById("valider").addEventListener("click", valider);
+    preview(); drawRayon();
+    if (window.innerWidth < 900) poste.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function f(id, label, val, def, full) {
+    return '<div' + (full ? ' class="full"' : '') + '><label for="fx-' + id + '">' + label + '</label><input id="fx-' + id + '" type="text" autocomplete="off" value="' + esc(val != null ? val : def) + '"></div>';
+  }
+  function readForm() { var o = {}; FIELDS.forEach(function (id) { o[id] = document.getElementById("fx-" + id).value.trim(); }); return o; }
+  function preview() { var p = document.getElementById("preview"); if (p) p.innerHTML = etq(readForm(), "zoom"); }
+
+  function valider() {
+    var v = poste.querySelector('input[name="v"]:checked');
+    if (!v) { say("Indiquez d'abord si l'étiquette est conforme ou non conforme.", true); return; }
+    work[current] = v.value === "ok" ? { verdict: "ok" } : { verdict: "ko", corr: readForm() };
+    autosave(); drawRayon();
+    var next = LABELS.filter(function (l) { return !(work[l.k] && work[l.k].verdict); })[0];
+    say(next ? "Étiquette n° " + current + " contrôlée. Passez à l'étiquette n° " + next.k + "." :
+               "Les 6 étiquettes sont contrôlées. Faites une capture d'écran du rayon et complétez la demande de réimpression dans votre document Word.");
+  }
+
+  // ---------- enregistrement
+  function state() {
+    var w = {};
+    Object.keys(work).forEach(function (k) {
+      var x = work[k]; if (!x || !x.verdict) return;
+      if (x.verdict === "ok") { w[k] = { v: 1 }; return; }
+      var c = {}, l = LABELS[k - 1];
+      FIELDS.forEach(function (f) { if (x.corr && x.corr[f] !== l[f]) c[f] = x.corr[f]; });
+      w[k] = { v: 0, c: c };
+    });
+    return { app: APP, nom: nom.value, w: w };
+  }
+  function unpack(st) {
+    if (st.work) return st.work;
+    var out = {};
+    Object.keys(st.w || {}).forEach(function (k) {
+      var x = st.w[k], l = LABELS[k - 1];
+      if (!l) return;
+      if (x.v === 1) { out[k] = { verdict: "ok" }; return; }
+      var c = {}; FIELDS.forEach(function (f) { c[f] = (x.c && f in x.c) ? x.c[f] : l[f]; });
+      out[k] = { verdict: "ko", corr: c };
+    });
+    return out;
+  }
+  function autosave() {
+    if (typeof syncUrl === "function") syncUrl(); try { localStorage.setItem(KEY, JSON.stringify(state())); } catch (e) {} }
+  function apply(st) {
+    work = unpack(st); nom.value = st.nom || ""; sig.textContent = nom.value.trim() || "…";
+    current = null; poste.innerHTML = '<h3>Poste de contrôle</h3><p class="empty-poste">Cliquez sur une étiquette du rayon pour la contrôler.</p>';
+    drawRayon();
+  }
+  // ---------- lien de sauvegarde (travail lisible depuis n'importe quel ordinateur)
+  function enc(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  function dec(t) { t = t.replace(/-/g, "+").replace(/_/g, "/"); while (t.length % 4) t += "="; return JSON.parse(decodeURIComponent(escape(atob(t)))); }
+  function baseUrl() { return location.href.split("#")[0]; }
+  function makeLink() { return baseUrl() + "#t=" + enc(state()); }
+  function syncUrl() { try { history.replaceState(null, "", "#t=" + enc(state())); } catch (e) {} }
+  var linkbox = document.getElementById("linkbox"), linkIn = document.getElementById("link");
+  document.getElementById("save").addEventListener("click", function () {
+    autosave();
+    linkIn.value = makeLink(); linkbox.hidden = false; linkIn.focus(); linkIn.select();
+    say("Travail enregistré. Copiez le lien et collez-le dans votre document Word.");
+  });
+  document.getElementById("copy").addEventListener("click", function () {
+    var done = function () { say("Lien copié ! Collez-le dans votre document Word (Ctrl + V)."); };
+    try {
+      navigator.clipboard.writeText(linkIn.value).then(done, function () { linkIn.select(); document.execCommand("copy"); done(); });
+    } catch (e) { linkIn.select(); try { document.execCommand("copy"); done(); } catch (e2) { say("Sélectionnez le lien puis faites Ctrl + C pour le copier.", true); } }
+  });
+
+  var armed = false, resetBtn = document.getElementById("reset");
+  resetBtn.addEventListener("click", function () {
+    if (!armed) { armed = true; resetBtn.textContent = "Confirmer : tout effacer ?"; return; }
+    armed = false; resetBtn.textContent = "Tout effacer";
+    apply({ nom: nom.value, work: {} }); autosave(); say("Le contrôle a été remis à zéro.");
+  });
+  function say(t, warn) { msg.textContent = t; msg.classList.toggle("warn", !!warn); }
+
+  nom.addEventListener("input", function () { sig.textContent = nom.value.trim() || "…"; autosave(); });
+  document.getElementById("date").textContent = "le " + new Date().toLocaleDateString("fr-FR");
+  drawRayon();
+  var fromLink = false;
+  if (location.hash.indexOf("#t=") === 0) {
+    try { var st0 = dec(location.hash.slice(3)); if (st0.app === APP) { apply(st0); autosave(); fromLink = true; say("Travail retrouvé grâce à votre lien de sauvegarde : vous pouvez continuer."); } }
+    catch (e) { say("Ce lien de sauvegarde est incomplet. Vérifiez que vous avez bien copié tout le lien.", true); }
+  }
+  if (!fromLink) { try { var saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved) { apply(saved); say("Votre travail précédent a été retrouvé sur cet ordinateur."); } } catch (e) {} }
+})();
+</script>
+
+</body>
+</html>
